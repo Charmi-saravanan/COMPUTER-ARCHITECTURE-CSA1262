@@ -1,0 +1,42 @@
+#include <stdio.h>
+struct Instruction {
+    char opcode; 
+    int operand;
+};
+int main() {
+    struct Instruction program[] = {
+        {'A', 5}, 
+        {'S', 3}, 
+        {'M', 2}  
+    };
+    struct Instruction IF, ID, EX, WB;
+    for (int i = 0; i < sizeof(program) / sizeof(program[0]); i++) {
+        IF = program[i];
+        printf("IF: Opcode = %c, Operand = %d\n", IF.opcode, IF.operand);
+        ID = IF;
+        printf("ID: Opcode = %c, Operand = %d\n", ID.opcode, ID.operand);
+        EX = ID;
+        switch (EX.opcode) {
+            case 'A':
+                EX.operand += 10; 
+                printf("EX: Perform addition with operand %d\n", EX.operand);
+                break;
+            case 'S':
+                EX.operand -= 2; 
+                printf("EX: Perform subtraction with operand %d\n", EX.operand);
+                break;
+            case 'M':
+                EX.operand *= 3; 
+                printf("EX: Perform multiplication with operand %d\n", EX.operand);
+                break;
+            default:
+                printf("EX: Invalid opcode\n");
+                break;
+        }
+        WB = EX;
+        printf("WB: Write result to memory or register\n");
+    }
+
+    return 0;
+}
+
