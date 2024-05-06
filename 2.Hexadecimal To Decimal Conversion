@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <math.h>
+int main() {
+    char hexNum[20];
+    int decimalNum = 0, i, length;
+    printf("Enter a hexadecimal number: ");
+    scanf("%s", hexNum);
+    for (length = 0; hexNum[length] != '\0'; length++);
+    for (i = 0; hexNum[i] != '\0'; i++) {
+        if (hexNum[i] >= '0' && hexNum[i] <= '9')
+            decimalNum += (hexNum[i] - '0') * pow(16, length - 1);
+        else if (hexNum[i] >= 'A' && hexNum[i] <= 'F')
+            decimalNum += (hexNum[i] - 'A' + 10) * pow(16, length - 1);
+        else if (hexNum[i] >= 'a' && hexNum[i] <= 'f')
+            decimalNum += (hexNum[i] - 'a' + 10) * pow(16, length - 1);
+        length--;
+    }
+    printf("Decimal representation: %d\n", decimalNum);
+
+    return 0;
+}
