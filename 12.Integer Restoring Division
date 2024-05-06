@@ -1,0 +1,43 @@
+#include <stdio.h>
+int restoringDivision(int dividend, int divisor) {
+    int quotient = 0;
+    int remainder = 0;
+
+   if (divisor < 0) {
+        dividend = -dividend;
+        divisor = -divisor;
+    }
+    if (dividend < 0) {
+        quotient = -1;
+        remainder = dividend;
+        dividend = -dividend;
+    }
+
+    int bitCount = sizeof(int) * 8; 
+    while (bitCount > 0) {
+        remainder = (remainder << 1) | ((dividend >> (bitCount - 1)) & 1);
+        if (remainder >= 0) {
+            remainder -= divisor;
+            quotient = (quotient << 1) | 1;
+        } else {
+            quotient = (quotient << 1) | 0;
+        }
+        bitCount--;
+    }
+
+    return quotient;
+}
+
+int main() {
+    int dividend, divisor;
+    printf("Enter the dividend: ");
+    scanf("%d", &dividend);
+    printf("Enter the divisor: ");
+    scanf("%d", &divisor);
+
+    int quotient = restoringDivision(dividend, divisor);
+
+    printf("Quotient: %d\n", quotient);
+    return 0;
+}
+
