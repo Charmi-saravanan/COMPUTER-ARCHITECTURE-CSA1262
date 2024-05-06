@@ -1,0 +1,46 @@
+#include <stdio.h>
+int boothMultiplication(int multiplier, int multiplicand) {
+    int product = 0;
+    int m = multiplier, q = multiplicand;
+    int A = 0;  
+    int Q = q;  
+    int Q_1 = 0;
+
+    int count = sizeof(int) * 8; 
+
+    while (count > 0) {
+        
+        if ((m & 1) == 1 && Q_1 == 0) {
+            A += Q;
+        } else if ((m & 1) == 0 && Q_1 == 1) {
+            A -= Q;
+        }
+        int A_0 = A & 1;
+        A >>= 1;
+        A |= (A_0 << (sizeof(int) * 8 - 1)); 
+        int Q_0 = Q & 1;
+        Q >>= 1;
+        Q |= (Q_0 << (sizeof(int) * 8 - 1)); 
+
+        Q_1 = Q_0; 
+        m >>= 1;   
+        count--;   
+    }
+    product = A;
+
+    return product;
+}
+
+int main() {
+    int multiplier, multiplicand;
+    printf("Enter the multiplier: ");
+    scanf("%d", &multiplier);
+    printf("Enter the multiplicand: ");
+    scanf("%d", &multiplicand);
+
+    int product = boothMultiplication(multiplier, multiplicand);
+
+    printf("Product: %d\n", product);
+    return 0;
+}
+
