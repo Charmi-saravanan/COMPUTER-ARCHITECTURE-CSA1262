@@ -1,0 +1,31 @@
+#include <stdio.h>
+typedef struct {
+    int opcode; 
+    int operand1;
+    int operand2;
+    int result;
+} Instruction;
+void execute_instruction(Instruction *instr) {
+    switch(instr->opcode) {
+        case 0: 
+            instr->result = instr->operand1 + instr->operand2;
+            break;
+        
+        default:
+            printf("Unknown opcode\n");
+    }
+}
+
+int main() {
+    
+    Instruction instr;
+    instr.opcode = 0; 
+    instr.operand1 = 5;
+    instr.operand2 = 3;
+    
+    execute_instruction(&instr);
+   
+    printf("Result: %d\n", instr.result);
+    
+    return 0;
+}
