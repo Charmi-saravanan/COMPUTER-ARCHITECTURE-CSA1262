@@ -1,0 +1,17 @@
+#include <stdio.h>
+int main() {
+    long long binaryNum;
+    int decimalNum = 0, base = 1, remainder;
+    printf("Enter a binary number: ");
+    scanf("%lld", &binaryNum);
+    while (binaryNum != 0) {
+        remainder = binaryNum % 10;
+        decimalNum += remainder * base;
+        binaryNum = binaryNum / 10;
+        base = base * 2;
+    }
+    printf("Decimal representation: %d\n", decimalNum);
+
+    return 0;
+}
+
